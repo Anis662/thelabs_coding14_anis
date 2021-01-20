@@ -113,8 +113,10 @@
       
 
       <h1 class="text-center text-info">Table Service</h1>
+      @can('create', App\Models\serviceHome::class)
       <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".create5">CREATE</button>
       @include('service.create')
+      @endcan
     <table class="table table-dark my-5">
         <thead>
           <tr>
@@ -137,15 +139,20 @@
             </td>
             <td> <p>{{ $i->text }}</p></td>
             <td class="d-flex">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit5-{{ $i->id }}">Edit</button>
-                @include('service.edit')
-
-                <form action="/serviceHome/{{ $i->id }}" method="POST">
-                  @csrf
-                  @method('delete')
-                  <button class="btn btn-danger mx-3">Delete</button>
+              @can('update', $i)
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit5-{{ $i->id }}">Edit</button>
+              @include('service.edit')
                 
-                </form>
+              @endcan
+              @can('delete', $i)
+              <form action="/serviceHome/{{ $i->id }}" method="POST">
+                @csrf
+                @method('delete')
+                <button class="btn btn-danger mx-3">Delete</button>
+              
+              </form>
+                
+              @endcan
             </td>
          
         </tbody>
@@ -181,8 +188,11 @@
             <td><img class="w-75" src="{{ asset("img/$i->image")}}"></td>
             <td>{{ $i->video }}</td>
             <td>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit6-{{ $i->id }}">Edit</button>
-                @include('about.edit')
+              @can('update', $i)
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit6-{{ $i->id }}">Edit</button>
+              @include('about.edit')
+                
+              @endcan
 
                 
             </td>
@@ -206,16 +216,22 @@
           <tr>
             <td>{{ $i->titre }}</td>
             <td>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit7-{{ $i->id }}">Edit</button>
-                @include('titreTestimonial.edit')
+              @can('update', $i)
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit7-{{ $i->id }}">Edit</button>
+              @include('titreTestimonial.edit')
+                
+              @endcan
             </td>
         </tbody>
         @endforeach
         <table class="table table-dark my-5">
           <h1 class="text-center text-success mb-5">Table commentaire</h1>
           <div class="text-center">
+            @can('create', App\Models\Testimonial::class)
             <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target=".create8">Create</button>
-                  @include('testimonial.create')
+            @include('testimonial.create')
+              
+            @endcan
           </div>
   
           <thead>
@@ -235,15 +251,20 @@
               <td>{{ $i->prenom }}</td>
               <td>{{ $i->fonction }}</td>
               <td class="d-flex">
-                  <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit8-{{ $i->id }}">Edit</button>
-                  @include('testimonial.edit')
-                  <form action="/testimonial/{{ $i->id }}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <button class="btn btn-danger mx-3">Delete</button>
+                @can('update', $i)
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit8-{{ $i->id }}">Edit</button>
+                @include('testimonial.edit')
                   
+                @endcan
+
+                @can('delete', $i)
+                <form action="/testimonial/{{ $i->id }}" method="POST">
+                  @csrf
+                  @method('delete')
+                  <button class="btn btn-danger mx-3">Delete</button>
+                </form>
                   
-                  </form>
+                @endcan
               </td>
           </tbody>
           @endforeach
@@ -294,8 +315,11 @@
             </td>
            
             <td>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit10-{{ $i->id }}">Edit</button>
-                @include('titreTeam.edit')
+              @can('update', $i)
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit10-{{ $i->id }}">Edit</button>
+              @include('titreTeam.edit')
+                
+              @endcan
 
                 
             </td>
@@ -308,9 +332,12 @@
 
       <h1 class="text-center my-5 text-warning">Table des profils de la Team</h1>
       <div class="text-center">
-
+        @can('create', App\Models\ProfilTeam::class)
         <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target=".create20">Create</button>
-                @include('profilTeam.create')
+        @include('profilTeam.create')
+        @endcan
+
+       
       </div>
     
     <table class="table my-5">
@@ -334,14 +361,21 @@
             <td>{{ $i->position }}</td>
            
             <td class="d-flex">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit12-{{ $i->id }}">Edit</button>
-                @include('profilTeam.edit')
-                <form action="/profilTeam/{{ $i->id }}" method="POST">
-                  @csrf
-                  @method('delete')
-                  <button class="btn btn-danger mx-3">Delete</button>
+              @can('update', $i)
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit12-{{ $i->id }}">Edit</button>
+              @include('profilTeam.edit')
                 
-                </form>
+              @endcan
+
+              @can('delete', $i)
+              <form action="/profilTeam/{{ $i->id }}" method="POST">
+                @csrf
+                @method('delete')
+                <button class="btn btn-danger mx-3">Delete</button>
+              
+              </form>
+                
+              @endcan
 
                 
             </td>
@@ -372,8 +406,10 @@
               <td>{{ $i->button }}</td>
 
               <td>
+                @can('update', $i  )
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target=".edit21-{{ $i->id }}">Edit</button>
                   @include('ready.edit')
+                  @endcan
                  
   
               </td>

@@ -77,7 +77,7 @@ Route::get("/blogPost/{id}", [BlogPostController::class, "index"]);
 
 Route::get("/contact", [ContactController::class, "index"])->name("contact");
 
-Route::get("/admin/user", [AdminUserController::class, "index"])->name("adminUser");
+Route::get("/admin/user", [AdminUserController::class, "index"])->middleware("utilisateur")->name("adminUser");
 
 Route::get("/admin/profil", [ProfilController::class, "index"])->name("profil");
 
@@ -89,7 +89,7 @@ Route::get("/admin/home", [HomeController::class, "index"]);
 
 Route::get("/admin/logo", [AdminLogoController::class, "index"])->name("adminLogo");
 
-Route::get("/admin/home2", [AdminHomeController::class, "index"])->name("adminHome");
+Route::get("/admin/home2", [AdminHomeController::class, "index"])->middleware('home')->name("adminHome");
 
 Route::get("/admin/service", [AdminServiceController::class, "index"])->name("adminService");
 
@@ -99,7 +99,7 @@ Route::get("/admin/newsletter", [AdminNewsletterController::class, "index"])->na
 
 Route::get("/admin/footer", [AdminFooterController::class, "index"])->name("adminFooter");
 
-Route::get("/admin/map", [AdminMapController::class, "index"])->name("adminMap");
+Route::get("/admin/map", [AdminMapController::class, "index"])->middleware('acces')->name("adminMap");
 
 Route::post('/send-article/{id}', [ArticleController::class, 'sendArticle']);
 

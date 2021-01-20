@@ -36,6 +36,7 @@ class ProfilTeamController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize("create",ProfilTeam::class);
         $profilTeam = new ProfilTeam();
         $request->validate([
             "image"=> "required",
@@ -83,6 +84,7 @@ class ProfilTeamController extends Controller
      */
     public function update(Request $request, ProfilTeam $profilTeam)
     {
+        $this->authorize("update",$profilTeam);
         $request->validate([
             "image"=> "required",
             "prenom"=> "required",
@@ -108,6 +110,7 @@ class ProfilTeamController extends Controller
      */
     public function destroy(ProfilTeam $profilTeam)
     {
+        $this->authorize("delete",$profilTeam);
         Storage::disk("public")->delete("img/team"  . $profilTeam->image);
         $profilTeam->delete();
         return redirect()->back();

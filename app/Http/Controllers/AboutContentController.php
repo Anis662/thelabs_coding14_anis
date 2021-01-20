@@ -70,6 +70,7 @@ class AboutContentController extends Controller
      */
     public function update(Request $request, AboutContent $aboutContent)
     {
+        $this->authorize("update",$aboutContent);
         $request->validate([
             "titre"=> "required",
             "text1"=> "required",

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Testimonial;
+use Carbon\Traits\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,6 +37,7 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize("create",Testimonial::class);
         $testimonial = new Testimonial();
         $request->validate([
             "text"=> "required",
@@ -83,6 +85,7 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, Testimonial $testimonial)
     {
+        $this->authorize("update",$testimonial);
         $request->validate([
             "text"=> "required",
             "image"=> "required",
@@ -108,6 +111,7 @@ class TestimonialController extends Controller
      */
     public function destroy(Testimonial $testimonial)
     {
+        $this->authorize("delete",$testimonial);
         Storage::disk("public")->delete("img/avatar"  . $testimonial->image );
         $testimonial->delete();
         return redirect()->back();

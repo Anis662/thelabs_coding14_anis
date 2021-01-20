@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Acces
+class Home
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class Acces
     {
         if (Auth::user()->role_id === 1 || Auth::user()->role_id === 2 ) {
             return $next($request);
-            
+           
         } else{
             return redirect()->back();
         }

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Acces
+class Utilisateur
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,10 @@ class Acces
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role_id === 1 || Auth::user()->role_id === 2 ) {
+        if (Auth::user()->role_id === 1) {
             return $next($request);
-            
         } else{
-            return redirect()->back();
+            dd("Tu n'a pas accès à cette page !");
         }
     }
 }

@@ -18,9 +18,11 @@
         {{ csrf_field() }}
 
         {{-- Name field --}}
+
         <div class="input-group mb-3">
+
             <input type="file" name="photo">
-           
+            
         </div>
 
 

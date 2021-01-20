@@ -69,6 +69,7 @@ class TitreTeamController extends Controller
      */
     public function update(Request $request, TitreTeam $titreTeam)
     {
+        $this->authorize("update",$titreTeam);
         $request->validate([
             "titre"=> "required"
         ]);

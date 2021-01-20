@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\InscriptionEvent;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -64,8 +65,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //fleche du storage
-        return User::create([
+        
+         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -74,5 +75,7 @@ class RegisterController extends Controller
             $data["photo"]->storePublicly('img','public')
 
         ]);
+        event(new InscriptionEvent($user));
+        return $user;
     }
 }

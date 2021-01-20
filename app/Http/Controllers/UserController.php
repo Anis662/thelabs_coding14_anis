@@ -42,7 +42,7 @@ class UserController extends Controller
             "name"=> "required",
             "email"=> "required",
             "password"=> "required",
-            "role_id"=> "required",
+            // "role_id"=> "required",
             "photo"=> "required"
         ]);
         $user->photo = $request->file("photo")->hashName();
@@ -52,7 +52,7 @@ class UserController extends Controller
         if ($user->password !== $request->password) {
             $user->password = Hash::make($request->password);
         }
-        $user->role_id = $request->role_id;
+        // $user->role_id = $request->role_id;
         $user->save();
         return redirect()->route("adminUser");
     }

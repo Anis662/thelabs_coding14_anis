@@ -69,6 +69,7 @@ class TitreTestiController extends Controller
      */
     public function update(Request $request, TitreTesti $titreTesti)
     {
+        $this->authorize("delete",$titreTesti);
         $request->validate([
             "titre"=> "required"
         ]);

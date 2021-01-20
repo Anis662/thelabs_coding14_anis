@@ -69,6 +69,7 @@ class ReadyController extends Controller
      */
     public function update(Request $request, Ready $ready)
     {
+        $this->authorize("update",$ready);
         $request->validate([
             "titre"=> "required",
             "text"=> "required",
